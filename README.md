@@ -1,4 +1,4 @@
-#Predictive Maintenance: Turbofan Jet Engine RUL Estimation
+# Predictive Maintenance: Turbofan Jet Engine RUL Estimation
 
 In this project, a deep learning hybrid network (1D CNN and LSTM) is designed to solve the regression task of predicting Remaining Useful Life (RUL) using the NASA Commercial Modular Aero-Propulsion System Simulation (C-MAPSS) dataset. 
 The goal is to avoid overestimation of RUL and consistently under-estimate the remaining life to ensure maintenan    ce is scheduled before catostrophic failure occurs.
@@ -8,7 +8,7 @@ The data set is  provided by the NASA Ames Prognostics Center of Excellence (PCo
 Download: https://phm-datasets.s3.amazonaws.com/NASA/6.+Turbofan+Engine+Degradation+Simulation+Data+Set.zip 
 Citation: A. Saxena and K. Goebel (2008). “Turbofan Engine Degradation Simulation Data Set”, NASA Prognostics Data Repository, NASA Ames Research Center, Moffett Field, CA
 
-# Notebooks
+## Notebooks
 **`01_cnn_lstm_FD001.ipynb`** contains the pre-processing, training, and evaluation on FD001 data (single operating condition, single fault mode). 
 Experiments compare loss functions for their effect on prediction bias and safety characteristics.
 
@@ -16,7 +16,7 @@ Experiments compare loss functions for their effect on prediction bias and safet
 Extension to FD002 (six operating conditions); Investigating model robustness under more complex operating conditions using the same architecture.
 
 
-# Model Architecture Overview
+## Model Architecture Overview
 This system fuses spatial feature extraction with temporal sequence modeling to handle multivariate, noisy time-series sensor data. 
 * **1D-CNN Layer:** Automatically extracts localized, spatial, and cross-channel sensor feature correlations within specific time windows.
 * **LSTM Layer:** Learns long-term temporal degradation trajectories and sequential dependencies across consecutive operational cycles.
