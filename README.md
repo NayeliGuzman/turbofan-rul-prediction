@@ -5,7 +5,7 @@ The goal is to avoid overestimation of RUL and consistently under-estimate the r
 
 ## Dataset
 The data set is  provided by the NASA Ames Prognostics Center of Excellence (PCoE).
-Download: https://phm-datasets.s3.amazonaws.com/NASA/6.+Turbofan+Engine+Degradation+Simulation+Data+Set.zip 
+Download:[data]( https://data.phmsociety.org/nasa/) 
 Citation: A. Saxena and K. Goebel (2008). “Turbofan Engine Degradation Simulation Data Set”, NASA Prognostics Data Repository, NASA Ames Research Center, Moffett Field, CA
 
 ## Notebooks
