@@ -10,12 +10,13 @@ Download: [data]( https://data.phmsociety.org/nasa/)
 Citation: A. Saxena and K. Goebel (2008). “Turbofan Engine Degradation Simulation Data Set”, NASA Prognostics Data Repository, NASA Ames Research Center, Moffett Field, CA
 
 ## Notebooks
-**`01_cnn_lstm_FD001.ipynb`** contains the pre-processing, training, and evaluation on FD001 data (single operating condition, single fault mode). 
-Experiments compare loss functions for their effect on prediction bias and safety characteristics.
+**`01_cnn_lstm_FD001.ipynb`** contains the pre-processing, training, and evaluation on FD001 data (single operating condition, single fault mode). Experiments compare loss functions for their effect on prediction bias and safety characteristics.
 
-**`02_cnn_lstm_FD002.ipynb`** *(in progress)*
-Extension to FD002 (six operating conditions); Investigating model robustness under more complex operating conditions using the same architecture.
+**`02_cnn_lstm_FD002.ipynb`** extends the previous experiments to FD002 (six operating conditions, single fault);Investigating asymmetric loss function robustness under more complex operating conditions using the same CNN-LSTM architecture.
 
+**`03_cnn_lstm_FD003.ipynb`** *(in progress)* applies the pipeline to FD003 (single operating condition, two modes of failure) with an emphasis on how asymmetric loss functions perform under increased fault complexity. 
+
+**`04_cnn_lstm_FD004.ipynb`** *(in progress)* explores FD004, featuring six operating conditions and two fault modes, to assess model and asymmetric loss function performance in the most complex settings. 
 
 ## Model Architecture Overview
 This system fuses spatial feature extraction with temporal sequence modeling to handle multivariate, noisy time-series sensor data. 
