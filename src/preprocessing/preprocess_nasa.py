@@ -276,7 +276,7 @@ def main():
     test_out  = os.path.join(args.output, f'test_{dataset_id}.csv')
     rul_out   = os.path.join(args.output, f'RUL_{dataset_id}.csv')
 
-    # Save as .npz then load in notebook with np.load(path, allow_pickle=False)
+    # Save as .npz 
     os.makedirs(args.output, exist_ok=True)
     out_path = os.path.join(args.output, f'{dataset_id}.npz')
     np.savez(out_path, X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test)
