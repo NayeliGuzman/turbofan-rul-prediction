@@ -12,12 +12,12 @@ Citation: A. Saxena and K. Goebel (2008). “Turbofan Engine Degradation Simulat
 
 Raw CMAPSS `.txt` files are processed via a dedicated pipeline (`src/preprocessing/`) for downstream model training:
 
-- **Column filtering** — drops constant sensors (std < 1e-9); for multi-condition 
+**Column filtering** drops constant sensors (std < 1e-9); for multi-condition 
   datasets (FD002, FD004) this is evaluated per operating condition via KMeans clustering
-- **RUL labeling** — computed as `max_cycle - current_cycle` per unit
-- **Normalization** — MinMaxScaler fit on train only, applied to both train and test 
+**RUL labeling** computed as `max_cycle - current_cycle` per unit
+**Normalization** MinMaxScaler fit on train only, applied to both train and test 
   to prevent data leakage
-- **Sequence windowing** — sliding window of 30 cycles for training; last 30 cycles per 
+**Sequence windowing** sliding window of 30 cycles for training; last 30 cycles per 
   unit for test; short sequences are front-padded
 
 Output is one `.npz` file per dataset containing `X_train`, `y_train`, `X_test`, `y_test`.
@@ -59,9 +59,9 @@ cd turbofan-rul-prediction
 pip install -r requirements.txt
 ```
 
-3. Download the dataset and place in 'nasa_data'
+3. Download the dataset and place in 'nasa_data'. The path to the downloaded data should be `"nasa_data/6. Turbofan Engine Degradation Simulation Data Set-CMAPSSData"`
 
-4. Run `01_cnn_lstm_FD001.ipynb`
+4. Run any of the notebooks (e.g. `01_cnn_lstm_FD001.ipynb`)
 
 ## Requirements
 
@@ -69,14 +69,14 @@ See `requirements.txt`. Key dependencies: TensorFlow, NumPy, Pandas, Scikit-lear
 
 
 
-# Pre-processing Only
+## Pre-processing Only
 
-1. Make the script executable (only needs to be done once)
+1. Make the script executable (run once)
 ```bash
 chmod +x src/preprocessing/run_preprocessing.sh
 ```
 
-2. Run preprocessing for all datasets
+2. Run preprocessing for all datasets at once and save in the desired file path
 ```bash
 ./src/preprocessing/run_preprocessing.sh \
   "nasa_data/6. Turbofan Engine Degradation Simulation Data Set-CMAPSSData" \
@@ -85,7 +85,7 @@ chmod +x src/preprocessing/run_preprocessing.sh
 
 This will generate `FD001.npz`, `FD002.npz`, `FD003.npz`, and `FD004.npz` inside `nasa_data/clean_data/`.
 
-3. Load a dataset in a notebook 
+3. Load a dataset into any notebook and you are all set to explore the data
 ```python
 import numpy as np
 
