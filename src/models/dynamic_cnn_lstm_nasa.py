@@ -11,6 +11,7 @@ class CNN_LSTM(Sequential):
     # Conv. block 1
     self.add(Conv1D(filters=25, kernel_size=10, padding='same', activation='elu', input_shape=input_shape))
     self.add(MaxPooling1D(pool_size=2, padding='same'))
+    self.add(BatchNormalization())
     self.add(Dropout(0.5))
 
     # Conv. block 2
