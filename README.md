@@ -6,8 +6,22 @@ The goal is to avoid overestimation of RUL and consistently under-estimate the r
 ## Dataset
 The data set is  provided by the NASA Ames Prognostics Center of Excellence (PCoE).
 Download: [data]( https://data.phmsociety.org/nasa/)
- 
 Citation: A. Saxena and K. Goebel (2008). “Turbofan Engine Degradation Simulation Data Set”, NASA Prognostics Data Repository, NASA Ames Research Center, Moffett Field, CA
+
+## Preprocessing Pipeline
+
+Raw CMAPSS `.txt` files are processed via a dedicated pipeline (`src/preprocessing/`) for downstream model training:
+
+- **Column filtering** — drops constant sensors (std < 1e-9); for multi-condition 
+  datasets (FD002, FD004) this is evaluated per operating condition via KMeans clustering
+- **RUL labeling** — computed as `max_cycle - current_cycle` per unit
+- **Normalization** — MinMaxScaler fit on train only, applied to both train and test 
+  to prevent data leakage
+- **Sequence windowing** — sliding window of 30 cycles for training; last 30 cycles per 
+  unit for test; short sequences are front-padded
+
+Output is one `.npz` file per dataset containing `X_train`, `y_train`, `X_test`, `y_test`.
+See [Pre-processing Only](#pre-processing-only) for instructions to run.
 
 ## Notebooks
 **`01_cnn_lstm_FD001.ipynb`** contains the pre-processing, training, and evaluation on FD001 data (single operating condition, single fault mode). Experiments compare loss functions for their effect on prediction bias and safety characteristics.
@@ -52,3 +66,31 @@ pip install -r requirements.txt
 ## Requirements
 
 See `requirements.txt`. Key dependencies: TensorFlow, NumPy, Pandas, Scikit-learn, Matplotlib.
+
+
+
+# Pre-processing Only
+
+1. Make the script executable (only needs to be done once)
+```bash
+chmod +x src/preprocessing/run_preprocessing.sh
+```
+
+2. Run preprocessing for all datasets
+```bash
+./src/preprocessing/run_preprocessing.sh \
+  "nasa_data/6. Turbofan Engine Degradation Simulation Data Set-CMAPSSData" \
+  nasa_data/clean_data
+```
+
+This will generate `FD001.npz`, `FD002.npz`, `FD003.npz`, and `FD004.npz` inside `nasa_data/clean_data/`.
+
+3. Load a dataset in a notebook 
+```python
+import numpy as np
+
+# Example for FD001
+data = np.load('nasa_data/clean_data/FD001.npz')
+X_train, y_train = data['X_train'], data['y_train']
+X_test,  y_test  = data['X_test'],  data['y_test']
+```
