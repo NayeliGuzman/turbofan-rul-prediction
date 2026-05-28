@@ -12,13 +12,13 @@ Citation: A. Saxena and K. Goebel (2008). “Turbofan Engine Degradation Simulat
 
 Raw CMAPSS `.txt` files are processed via a dedicated pipeline (`src/preprocessing/`) for downstream model training:
 
-**Column filtering** drops constant sensors (std < 1e-9); for multi-condition 
-  datasets (FD002, FD004) this is evaluated per operating condition via KMeans clustering
+**Column filtering** drops constant sensors (std < 1e-9); for multi-condition datasets, this is evaluated per operating condition via KMeans clustering
+
 **RUL labeling** computed as `max_cycle - current_cycle` per unit
-**Normalization** MinMaxScaler fit on train only, applied to both train and test 
-  to prevent data leakage
-**Sequence windowing** sliding window of 30 cycles for training; last 30 cycles per 
-  unit for test; short sequences are front-padded
+
+**Normalization** MinMaxScaler fit on train only, applied to both train and test to prevent data leakage
+
+**Sequence windowing** sliding window of 30 cycles; short sequences are front-padded
 
 Output is one `.npz` file per dataset containing `X_train`, `y_train`, `X_test`, `y_test`.
 See [Pre-processing Only](#pre-processing-only) for instructions to run.
@@ -34,9 +34,12 @@ See [Pre-processing Only](#pre-processing-only) for instructions to run.
 
 ## Model Architecture Overview
 This system fuses spatial feature extraction with temporal sequence modeling to handle multivariate, noisy time-series sensor data. 
-* **1D-CNN Layer:** Automatically extracts localized, spatial, and cross-channel sensor feature correlations within specific time windows.
-* **LSTM Layer:** Learns long-term temporal degradation trajectories and sequential dependencies across consecutive operational cycles.
-* **Regression Head:** A fully connected Dense layer mapping the combined feature maps to a continuous, single real-valued RUL scalar output.
+
+**1D-CNN Layer:** Automatically extracts localized, spatial, and cross-channel sensor feature correlations within specific time windows.
+
+**LSTM Layer:** Learns long-term temporal degradation trajectories and sequential dependencies across consecutive operational cycles.
+
+**Regression Head:** A fully connected Dense layer mapping the combined feature maps to a continuous, single real-valued RUL scalar output.
 
 ## Loss Function Experiments and Metrics Evaluated
 
